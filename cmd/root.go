@@ -10,6 +10,7 @@ import (
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/alimy/mir-covid19/internal/logus"
 	"github.com/alimy/mir-covid19/servants"
+	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
 
@@ -50,8 +51,10 @@ func Execute() {
 func inSetup(postInit func(*config.Config)) *config.Config {
 	if inDebug {
 		logus.SetLevel(logus.LevelDebug)
+		gin.SetMode(gin.DebugMode)
 	} else {
 		logus.SetLevel(logus.LevelInfo)
+		gin.SetMode(gin.ReleaseMode)
 	}
 	conf := config.InitFrom(inConfigFile)
 	postInit(conf)

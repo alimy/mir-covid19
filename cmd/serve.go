@@ -6,6 +6,9 @@ package cmd
 
 import (
 	"github.com/alimy/mir-covid19/internal/config"
+	"github.com/alimy/mir-covid19/mirc/gen/api"
+	"github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api"
+	"github.com/alimy/mir-covid19/servants"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -45,5 +48,6 @@ func serveRun(_cmd *cobra.Command, _args []string) {
 }
 
 func registerServants(e *gin.Engine) {
-	// TODO: register routes to e
+	api.RegisterPortalServant(e, servants.NewPortal())
+	ncovh5api.RegisterEpidemicServant(e, servants.NewEpidemic())
 }

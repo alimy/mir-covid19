@@ -11,8 +11,6 @@ import (
 	"github.com/alimy/mir/v2/engine"
 
 	_ "github.com/alimy/mir-covid19/mirc/routes"
-	_ "github.com/alimy/mir-covid19/mirc/routes/v1"
-	_ "github.com/alimy/mir-covid19/mirc/routes/v2"
 )
 
 //go:generate go run main.go

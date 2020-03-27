@@ -15,7 +15,7 @@ build: fmt
 
 .PHONY: build
 serve: fmt
-	go run -ldflags '$(LDFLAGS)' main.go serve
+	go run -ldflags '$(LDFLAGS)' main.go serve --debug
 
 .PHONY: gen-assets
 gen-assets: $(ASSETS_DATA_FILES)
@@ -25,14 +25,14 @@ gen-assets: $(ASSETS_DATA_FILES)
 
 .PHONY: gen-webui
 gen-webui: $(WEBUI_DATA_FILES)
-	-rm -f web/web_gen.go
-	go generate web/web.go
+	-rm -f web/dist_gen.go
+	go generate web/dist.go
 	@$(GOFMT) web
 
 .PHONY: generate
 generate:
 	@cd mirc
-	@-rm -rf gen
+	@-rm -rf mirc/gen
 	@go generate mirc/main.go
 	@cd ..
 	@$(GOFMT) ./
