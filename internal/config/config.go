@@ -85,6 +85,8 @@ func myAppSection(config *Config, custom *Config, key toml.Key) {
 		config.Application.Authors = custom.Application.Authors
 	case "description":
 		config.Application.Description = custom.Application.Description
+	case "run_mode":
+		config.Application.RunMode = custom.Application.RunMode
 	}
 }
 
@@ -92,8 +94,6 @@ func myServeSection(config *Config, custom *Config, key toml.Key) {
 	switch key[1] {
 	case "addr":
 		config.Serve.Addr = custom.Serve.Addr
-	case "run_mode":
-		config.Serve.RunMode = custom.Serve.RunMode
 	}
 }
 
@@ -120,7 +120,7 @@ func myDatabaseSection(config *Config, custom *Config, key toml.Key) {
 
 func myDevelopSection(config *Config, custom *Config, key toml.Key) {
 	switch key[1] {
-	case "xorm_fake":
-		config.Develop.XormFake = custom.Develop.XormFake
+	case "dataware_fake":
+		config.Develop.DatawareFake = custom.Develop.DatawareFake
 	}
 }

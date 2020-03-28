@@ -14,11 +14,12 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-// MyDB return an initialed db
-func MyDB() *gorm.DB {
+// NewDataWare return an initialed db
+func NewDataWare() Dataware {
 	conf := config.MyConfig()
-	if conf.Develop.XormFake {
-		return nil
+	if conf.Develop.DatawareFake {
+		logrus.Info("in dataware fake mode so dataware is faked")
+		return newDwFake()
 	}
 	dialect, dsn := conf.Database.Dsn()
 	db, err := gorm.Open(dialect, dsn)
@@ -26,5 +27,5 @@ func MyDB() *gorm.DB {
 		logrus.Fatal(err)
 	}
 	logrus.Infof("connect database(%s) by dsn: %s", dialect, dsn)
-	return db
+	return newDwGorm(db)
 }

@@ -5,8 +5,9 @@
 package servants
 
 import (
-	ps "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
 	"github.com/gin-gonic/gin"
+
+	ps "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
 )
 
 type pneumonia struct {

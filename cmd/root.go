@@ -48,14 +48,18 @@ func Execute() {
 }
 
 func inSetup(postInit func(*config.Config)) *config.Config {
-	if inDebug {
+	conf := config.InitFrom(inConfigFile)
+	inDev := false
+	if conf.Application.RunMode == "develop" || inDebug {
+		inDev = true
+	}
+	if inDev {
 		logus.SetLevel(logus.LevelDebug)
 		gin.SetMode(gin.DebugMode)
 	} else {
 		logus.SetLevel(logus.LevelInfo)
 		gin.SetMode(gin.ReleaseMode)
 	}
-	conf := config.InitFrom(inConfigFile)
 	postInit(conf)
 	return conf
 }

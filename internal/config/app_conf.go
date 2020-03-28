@@ -22,14 +22,14 @@ type Config struct {
 type Application struct {
 	Name        string
 	Version     string
-	Description string
 	Authors     []string
+	Description string
+	RunMode     string `toml:"run_mode"`
 }
 
 // Serve indicate serve section config
 type Serve struct {
-	Addr    string
-	RunMode string `toml:"run_mode"`
+	Addr string
 }
 
 // Database indicate database section config
@@ -46,7 +46,7 @@ type Database struct {
 
 // Develop indicate develop section config
 type Develop struct {
-	XormFake bool `toml:"xorm_fake"`
+	DatawareFake bool `toml:"dataware_fake"`
 }
 
 // SetAddr set addr
@@ -63,13 +63,13 @@ func (c Config) String() string {
 
 // String string object
 func (c Application) String() string {
-	return fmt.Sprintf("{name:%q, version:%q, authors:%v,description:%q}",
-		c.Name, c.Version, c.Authors, c.Description)
+	return fmt.Sprintf("{name:%q, version:%q, authors:%v,description:%q, run_mode:%q}",
+		c.Name, c.Version, c.Authors, c.Description, c.RunMode)
 }
 
 // String string object
 func (c Serve) String() string {
-	return fmt.Sprintf("{addr:%q, run_mode:%q}", c.Addr, c.RunMode)
+	return fmt.Sprintf("{addr:%q}", c.Addr)
 }
 
 // String string object
@@ -80,7 +80,7 @@ func (c Database) String() string {
 
 // String string object
 func (c Develop) String() string {
-	return fmt.Sprintf("{xorm_fake:%t}", c.XormFake)
+	return fmt.Sprintf("{dataware_fake:%t}", c.DatawareFake)
 }
 
 // Dsn return database type and DSN(Database Source Name)

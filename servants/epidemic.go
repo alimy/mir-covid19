@@ -5,8 +5,9 @@
 package servants
 
 import (
-	ds "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
 	"github.com/gin-gonic/gin"
+
+	ds "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
 )
 
 type epidemic struct {

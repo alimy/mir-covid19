@@ -8,7 +8,6 @@ import (
 	"sync"
 
 	"github.com/alimy/mir-covid19/internal/xorm"
-	"github.com/jinzhu/gorm"
 )
 
 var (
@@ -17,13 +16,13 @@ var (
 )
 
 type baseServant struct {
-	db *gorm.DB
+	dw xorm.Dataware
 }
 
 func myBaseServant() *baseServant {
 	onceInit.Do(func() {
 		singleServant = &baseServant{
-			db: xorm.MyDB(),
+			dw: xorm.NewDataWare(),
 		}
 	})
 	return singleServant

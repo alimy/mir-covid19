@@ -3,11 +3,11 @@ name = "covid"
 version = "0.1.0"
 authors = ["Michael Li <alimy@gility.net>"]
 description = "covid19 information service"
+# App run mode, either "develop", "product"
+run_mode = "product"
 
 [serve]
 addr = ":10169"
-# App run mode, either "debug", "product"
-run_mode = "debug"
 
 [database]
 # The database backend, either "postgres", "mysql" "sqlite3" or "mssql".
@@ -24,4 +24,4 @@ path = "data/epidemic.db"
 
 [develop]
 # whether use fake implementation of xorm module
-xorm_fake = true
+dataware_fake = true
