@@ -9,7 +9,6 @@ import (
 
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/alimy/mir-covid19/internal/logus"
-	"github.com/alimy/mir-covid19/servants"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
@@ -58,10 +57,5 @@ func inSetup(postInit func(*config.Config)) *config.Config {
 	}
 	conf := config.InitFrom(inConfigFile)
 	postInit(conf)
-	coreInit(conf)
 	return conf
-}
-
-func coreInit(conf *config.Config) {
-	servants.InitWith(conf)
 }

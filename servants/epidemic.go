@@ -48,6 +48,6 @@ func (e *epidemic) GetCityInfoByCode(c *gin.Context) {
 // NewEpidemic return an Epidemic service instance
 func NewEpidemic() ds.Epidemic {
 	return &epidemic{
-		baseServant: baseSrv,
+		baseServant: myBaseServant(),
 	}
 }

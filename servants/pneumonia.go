@@ -20,6 +20,6 @@ func (e *pneumonia) GetAreaContents(c *gin.Context) {
 // NewEpidemic return an Pneumonia service instance
 func NewPneumonia() ps.Pneumonia {
 	return &pneumonia{
-		baseServant: baseSrv,
+		baseServant: myBaseServant(),
 	}
 }
