@@ -6,12 +6,14 @@ package cmd
 
 import (
 	"github.com/alimy/mir-covid19/internal/config"
-	"github.com/alimy/mir-covid19/mirc/gen/api"
-	"github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api"
 	"github.com/alimy/mir-covid19/servants"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	rt "github.com/alimy/mir-covid19/mirc/gen/api"
+	ds "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
+	pn "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
 )
 
 var (
@@ -48,6 +50,7 @@ func serveRun(_cmd *cobra.Command, _args []string) {
 }
 
 func registerServants(e *gin.Engine) {
-	api.RegisterPortalServant(e, servants.NewPortal())
-	ncovh5api.RegisterEpidemicServant(e, servants.NewEpidemic())
+	rt.RegisterPortalServant(e, servants.NewPortal())
+	pn.RegisterPneumoniaServant(e, servants.NewPneumonia())
+	ds.RegisterEpidemicServant(e, servants.NewEpidemic())
 }

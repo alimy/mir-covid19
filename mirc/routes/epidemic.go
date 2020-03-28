@@ -11,16 +11,14 @@ func init() {
 
 // Epidemic contents fetch interface define
 type Epidemic struct {
-	Group             mir.Group `mir:"ncovh5api"`
-	GetContents       mir.Post  `mir:"THPneumoniaService/getContents"`
-	GetAreaContents   mir.Post  `mir:"THPneumoniaService/getAreaContents"`
-	GetInfoBatch      mir.Post  `mir:"THPneumoniaOuterDataService/getInfoBatch"`
-	GetChinaTotal     mir.Post  `mir:"THPneumoniaOuterDataService/getChinaTotal"`
-	GetAreaInfo       mir.Post  `mir:"THPneumoniaOuterDataService/getAreaInfo"`
-	GetForeignTotal   mir.Post  `mir:"THPneumoniaOuterDataService/getForeignTotal"`
-	GetForeignInfo    mir.Post  `mir:"THPneumoniaOuterDataService/getForeignInfo"`
-	GetForeignHistory mir.Post  `mir:"THPneumoniaOuterDataService/getForeignHistory"`
-	GetHubeiInfo      mir.Post  `mir:"THPneumoniaOuterDataService/getHubeiInfo"`
-	GetRate           mir.Post  `mir:"THPneumoniaOuterDataService/getRate"`
-	GetCityInfoByCode mir.Post  `mir:"THPneumoniaOuterDataService/getCityInfoByCode"`
+	Group             mir.Group `mir:"ncovh5api/THPneumoniaOuterDataService"`
+	GetInfoBatch      mir.Post  `mir:"getInfoBatch"`
+	GetChinaTotal     mir.Post  `mir:"getChinaTotal"`
+	GetAreaInfo       mir.Post  `mir:"getAreaInfo"`
+	GetForeignTotal   mir.Post  `mir:"getForeignTotal"`
+	GetForeignInfo    mir.Post  `mir:"getForeignInfo"`
+	GetForeignHistory mir.Post  `mir:"getForeignHistory"`
+	GetHubeiInfo      mir.Post  `mir:"getHubeiInfo"`
+	GetRate           mir.Post  `mir:"getRate"`
+	GetCityInfoByCode mir.Post  `mir:"getCityInfoByCode"`
 }

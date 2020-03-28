@@ -15,9 +15,9 @@ var (
 	BuildTime = ""
 )
 
-// AppVer version of Mirc
+// AppVer application version info
 var AppVer = semver.Version{
 	Major: 0,
-	Minor: 3,
-	Patch: 2,
+	Minor: 1,
+	Patch: 0,
 }

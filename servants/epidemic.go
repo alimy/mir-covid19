@@ -1,20 +1,12 @@
 package servants
 
 import (
-	"github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api"
+	api "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
 	"github.com/gin-gonic/gin"
 )
 
 type epidemic struct {
-	// TODO
-}
-
-func (e *epidemic) GetContents(c *gin.Context) {
-	// TODO
-}
-
-func (e *epidemic) GetAreaContents(c *gin.Context) {
-	// TODO
+	*baseServant
 }
 
 func (e *epidemic) GetInfoBatch(c *gin.Context) {
@@ -53,7 +45,9 @@ func (e *epidemic) GetCityInfoByCode(c *gin.Context) {
 	// TODO
 }
 
-// NewEpidemic return an ncovh5api.Epidemic instance
-func NewEpidemic() ncovh5api.Epidemic {
-	return &epidemic{}
+// NewEpidemic return an Epidemic service instance
+func NewEpidemic() api.Epidemic {
+	return &epidemic{
+		baseServant: baseSrv,
+	}
 }

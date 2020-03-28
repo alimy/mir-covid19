@@ -6,10 +6,11 @@ package xorm
 
 import (
 	"github.com/alimy/mir-covid19/internal/config"
-	_ "github.com/jinzhu/gorm"
+	"github.com/jinzhu/gorm"
 )
 
-// InitWith initial gorm from config
-func InitWith(conf *config.Config) {
+// InitFrom initial gorm from config
+func InitFrom(conf *config.Config) *gorm.DB {
 	// TODO
+	return nil
 }

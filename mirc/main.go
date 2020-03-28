@@ -17,7 +17,7 @@ import (
 func main() {
 	log.Println("generate code start")
 	opts := core.Options{
-		core.RunMode(core.InSerialMode),
+		core.RunMode(core.InSerialDebugMode),
 		core.GeneratorName(core.GeneratorGin),
 		core.SinkPath("./gen"),
 	}

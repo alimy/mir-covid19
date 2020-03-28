@@ -31,10 +31,7 @@ gen-webui: $(WEBUI_DATA_FILES)
 
 .PHONY: generate
 generate:
-	@cd mirc
-	@-rm -rf mirc/gen
 	@go generate mirc/main.go
-	@cd ..
 	@$(GOFMT) ./
 
 .PHONY: fmt

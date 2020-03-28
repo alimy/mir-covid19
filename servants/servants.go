@@ -5,10 +5,29 @@
 package servants
 
 import (
+	"sync"
+
 	"github.com/alimy/mir-covid19/internal/config"
+	"github.com/alimy/mir-covid19/internal/xorm"
+	"github.com/jinzhu/gorm"
 )
+
+var (
+	baseSrv *baseServant
+
+	onceInit = &sync.Once{}
+)
+
+type baseServant struct {
+	db *gorm.DB
+}
 
 // InitWith initial servants from config
 func InitWith(conf *config.Config) {
-	// TODO
+	onceInit.Do(func() {
+		db := xorm.InitFrom(conf)
+		baseSrv = &baseServant{
+			db: db,
+		}
+	})
 }
