@@ -5,11 +5,26 @@
 package xorm
 
 import (
+	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-// MyDb return an initialed db
-func MyDb() *gorm.DB {
-	// TODO
-	return nil
+// MyDB return an initialed db
+func MyDB() *gorm.DB {
+	conf := config.MyConfig()
+	if conf.Develop.XormFake {
+		return nil
+	}
+	dialect, dsn := conf.Database.Dsn()
+	db, err := gorm.Open(dialect, dsn)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	logrus.Infof("connect database(%s) by dsn: %s", dialect, dsn)
+	return db
 }

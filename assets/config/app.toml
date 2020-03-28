@@ -6,3 +6,22 @@ description = "covid19 information service"
 
 [serve]
 addr = ":10169"
+# App run mode, either "debug", "product"
+run_mode = "debug"
+
+[database]
+# The database backend, either "postgres", "mysql" "sqlite3" or "mssql".
+type = "mysql"
+host = "127.0.0.1:3306"
+name = "db_epidemic"
+user = "covid19"
+password ="covid2019"
+param = ""
+# For "postgres" only, either "disable", "require" or "verify-full".
+ssl_mode = "disable"
+# For "sqlite3" only, make sure to use absolute path.
+path = "data/epidemic.db"
+
+[develop]
+# whether use fake implementation of xorm module
+xorm_fake = true

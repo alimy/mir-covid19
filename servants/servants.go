@@ -23,7 +23,7 @@ type baseServant struct {
 func myBaseServant() *baseServant {
 	onceInit.Do(func() {
 		singleServant = &baseServant{
-			db: xorm.MyDb(),
+			db: xorm.MyDB(),
 		}
 	})
 	return singleServant

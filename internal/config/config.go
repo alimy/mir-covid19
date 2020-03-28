@@ -67,6 +67,10 @@ func customConfig(config *Config, path string) {
 			myAppSection(config, customConfig, key)
 		case "serve":
 			myServeSection(config, customConfig, key)
+		case "database":
+			myDatabaseSection(config, customConfig, key)
+		case "develop":
+			myDevelopSection(config, customConfig, key)
 		}
 	}
 }
@@ -88,5 +92,35 @@ func myServeSection(config *Config, custom *Config, key toml.Key) {
 	switch key[1] {
 	case "addr":
 		config.Serve.Addr = custom.Serve.Addr
+	case "run_mode":
+		config.Serve.RunMode = custom.Serve.RunMode
+	}
+}
+
+func myDatabaseSection(config *Config, custom *Config, key toml.Key) {
+	switch key[1] {
+	case "type":
+		config.Database.Type = custom.Database.Type
+	case "host":
+		config.Database.Host = custom.Database.Host
+	case "name":
+		config.Database.Name = custom.Database.Name
+	case "user":
+		config.Database.User = custom.Database.User
+	case "password":
+		config.Database.Password = custom.Database.Password
+	case "param":
+		config.Database.Param = custom.Database.Param
+	case "sslMode":
+		config.Database.SslMode = custom.Database.SslMode
+	case "path":
+		config.Database.Path = custom.Database.Path
+	}
+}
+
+func myDevelopSection(config *Config, custom *Config, key toml.Key) {
+	switch key[1] {
+	case "xorm_fake":
+		config.Develop.XormFake = custom.Develop.XormFake
 	}
 }
