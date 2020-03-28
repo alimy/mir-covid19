@@ -1,7 +1,7 @@
 package servants
 
 import (
-	api "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
+	ds "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaOuterDataService"
 	"github.com/gin-gonic/gin"
 )
 
@@ -46,7 +46,7 @@ func (e *epidemic) GetCityInfoByCode(c *gin.Context) {
 }
 
 // NewEpidemic return an Epidemic service instance
-func NewEpidemic() api.Epidemic {
+func NewEpidemic() ds.Epidemic {
 	return &epidemic{
 		baseServant: baseSrv,
 	}

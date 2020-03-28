@@ -1,7 +1,7 @@
 package servants
 
 import (
-	api "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
+	ps "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,7 +18,7 @@ func (e *pneumonia) GetAreaContents(c *gin.Context) {
 }
 
 // NewEpidemic return an Pneumonia service instance
-func NewPneumonia() api.Pneumonia {
+func NewPneumonia() ps.Pneumonia {
 	return &pneumonia{
 		baseServant: baseSrv,
 	}
