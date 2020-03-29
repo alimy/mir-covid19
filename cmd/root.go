@@ -10,6 +10,7 @@ import (
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/alimy/mir-covid19/internal/logus"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -56,6 +57,7 @@ func inSetup(postInit func(*config.Config)) *config.Config {
 	if inDev {
 		logus.SetLevel(logus.LevelDebug)
 		gin.SetMode(gin.DebugMode)
+		logrus.Info("run in develop mode")
 	} else {
 		logus.SetLevel(logus.LevelInfo)
 		gin.SetMode(gin.ReleaseMode)

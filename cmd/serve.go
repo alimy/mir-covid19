@@ -5,6 +5,11 @@
 package cmd
 
 import (
+	"context"
+	"net/http"
+	"os"
+
+	"github.com/alimy/mgo/grace"
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/alimy/mir-covid19/servants"
 	"github.com/gin-gonic/gin"
@@ -44,9 +49,24 @@ func serveRun(_cmd *cobra.Command, _args []string) {
 	registerServants(e)
 
 	// start servant service
-	if err := e.Run(conf.Serve.Addr); err != nil {
-		logrus.Fatal(err)
-	}
+	server := &http.Server{Addr: conf.Serve.Addr, Handler: e}
+	go func() {
+		logrus.Infof("listening and serving HTTP on %s", server.Addr)
+		err := server.ListenAndServe()
+		if err != nil && err != http.ErrServerClosed {
+			logrus.Fatal(err)
+		}
+	}()
+
+	// graceful shutdown server
+	grace.Listen(func(signal os.Signal) (isContinue bool) {
+		logrus.Infof("shutdown server because received signal: %s", signal)
+		if err := server.Shutdown(context.Background()); err != nil {
+			logrus.Fatal(err)
+		}
+		return false
+	})
+	grace.Wait()
 }
 
 func registerServants(e *gin.Engine) {
