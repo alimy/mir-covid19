@@ -69,6 +69,8 @@ func customConfig(config *Config, path string) {
 			myServeSection(config, customConfig, key)
 		case "database":
 			myDatabaseSection(config, customConfig, key)
+		case "redis":
+			myRedisSection(config, customConfig, key)
 		case "develop":
 			myDevelopSection(config, customConfig, key)
 		}
@@ -115,6 +117,17 @@ func myDatabaseSection(config *Config, custom *Config, key toml.Key) {
 		config.Database.SslMode = custom.Database.SslMode
 	case "path":
 		config.Database.Path = custom.Database.Path
+	}
+}
+
+func myRedisSection(config *Config, custom *Config, key toml.Key) {
+	switch key[1] {
+	case "addr":
+		config.Redis.Addr = custom.Redis.Addr
+	case "password":
+		config.Redis.Password = custom.Redis.Password
+	case "db":
+		config.Redis.DB = custom.Redis.DB
 	}
 }
 

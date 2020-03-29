@@ -15,6 +15,7 @@ type Config struct {
 	Application Application
 	Serve       Serve
 	Database    Database
+	Redis       Redis
 	Develop     Develop
 }
 
@@ -44,9 +45,17 @@ type Database struct {
 	Path     string
 }
 
+// Redis indicate redis section config
+type Redis struct {
+	Addr     string
+	Password string
+	DB       int `toml:"db"`
+}
+
 // Develop indicate develop section config
 type Develop struct {
 	DatawareFake bool `toml:"dataware_fake"`
+	CacheFake    bool `toml:"cache_fake"`
 }
 
 // SetAddr set addr
@@ -79,8 +88,13 @@ func (c Database) String() string {
 }
 
 // String string object
+func (c Redis) String() string {
+	return fmt.Sprintf("{addr:%q, password:%q, db:%d}", c.Addr, c.Password, c.DB)
+}
+
+// String string object
 func (c Develop) String() string {
-	return fmt.Sprintf("{dataware_fake:%t}", c.DatawareFake)
+	return fmt.Sprintf("{dataware_fake:%t, cache_fake:%t}", c.DatawareFake, c.CacheFake)
 }
 
 // Dsn return database type and DSN(Database Source Name)

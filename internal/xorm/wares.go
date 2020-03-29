@@ -4,17 +4,23 @@
 
 package xorm
 
+import "errors"
+
+var (
+	errNotReady = errors.New("not ready")
+)
+
 // Dataware data service interface
 type Dataware interface {
-	GetInfoBatch()
-	GetChinaTotal()
-	GetAreaInfo() *AreaInfo
-	GetForeignTotal()
-	GetForeignInfo()
-	GetForeignHistory()
-	GetHubeiInfo()
-	GetRate()
-	GetCityInfoByCode()
-	GetContents()
-	GetAreaContents()
+	GetInfoBatch() (interface{}, error)
+	GetChinaTotal() (interface{}, error)
+	GetAreaInfo(*AreaInfoArg) (*AreaInfo, error)
+	GetForeignTotal() (interface{}, error)
+	GetForeignInfo() (interface{}, error)
+	GetForeignHistory() (interface{}, error)
+	GetHubeiInfo() (interface{}, error)
+	GetRate() (interface{}, error)
+	GetCityInfoByCode() (interface{}, error)
+	GetContents() (interface{}, error)
+	GetAreaContents() (interface{}, error)
 }

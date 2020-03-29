@@ -4,7 +4,7 @@
 
 package xorm
 
-// AreaInfo area information
-type AreaInfo struct {
+// Area area table schema
+type Area struct {
 	// TODO
 }

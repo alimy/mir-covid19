@@ -4,55 +4,67 @@
 
 package xorm
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type dwGorm struct {
 	*gorm.DB
 }
 
-func (d *dwGorm) GetInfoBatch() {
+func (d *dwGorm) GetInfoBatch() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetChinaTotal() {
+func (d *dwGorm) GetChinaTotal() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetAreaInfo() *AreaInfo {
+func (d *dwGorm) GetAreaInfo(p *AreaInfoArg) (*AreaInfo, error) {
 	// TODO
-	return nil
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignTotal() {
+func (d *dwGorm) GetForeignTotal() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignInfo() {
+func (d *dwGorm) GetForeignInfo() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignHistory() {
+func (d *dwGorm) GetForeignHistory() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetHubeiInfo() {
+func (d *dwGorm) GetHubeiInfo() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetRate() {
+func (d *dwGorm) GetRate() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetCityInfoByCode() {
+func (d *dwGorm) GetCityInfoByCode() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetContents() {
+func (d *dwGorm) GetContents() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
-func (d *dwGorm) GetAreaContents() {
+func (d *dwGorm) GetAreaContents() (interface{}, error) {
 	// TODO
+	return nil, errNotReady
 }
 
 func newDwGorm(db *gorm.DB) Dataware {

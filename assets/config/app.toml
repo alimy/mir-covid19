@@ -22,6 +22,12 @@ ssl_mode = "disable"
 # For "sqlite3" only, make sure to use absolute path.
 path = "data/epidemic.db"
 
+[redis]
+addr = "127.0.0.1:6379"
+password = ""
+db = 0
+
 [develop]
 # whether use fake implementation of xorm module
 dataware_fake = true
+cache_fake = true

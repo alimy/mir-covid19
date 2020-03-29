@@ -18,7 +18,7 @@ import (
 func NewDataWare() Dataware {
 	conf := config.MyConfig()
 	if conf.Develop.DatawareFake {
-		logrus.Info("in dataware fake mode so dataware is faked")
+		logrus.Info("in dataware fake mode so use faked dataware")
 		return newDwFake()
 	}
 	dialect, dsn := conf.Database.Dsn()

@@ -15,11 +15,17 @@ type pneumonia struct {
 }
 
 func (e *pneumonia) GetContents(c *gin.Context) {
-	// TODO
+	e.handle(c, "Contents", func() (interface{}, error) {
+		data, err := e.dw.GetContents()
+		return data, err
+	})
 }
 
 func (e *pneumonia) GetAreaContents(c *gin.Context) {
-	// TODO
+	e.handle(c, "AreaContents", func() (interface{}, error) {
+		data, err := e.dw.GetAreaContents()
+		return data, err
+	})
 }
 
 // NewEpidemic return an Pneumonia service instance
