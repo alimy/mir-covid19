@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /app/covid19
+
+# Link volumed data with app data
+ln -sfn /data/covid19/log  ./log
+ln -sfn /data/covid19/data ./data

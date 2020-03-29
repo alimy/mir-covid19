@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if test -f ./setup; then
+    source ./setup
+fi
+
+export USER=covid19
+exec gosu $USER /app/covid19/covid serv --config /data/covid19/conf/app.toml
