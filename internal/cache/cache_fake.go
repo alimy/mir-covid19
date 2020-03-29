@@ -8,11 +8,11 @@ type cacheFake struct {
 	// just empty
 }
 
-func (c *cacheFake) Get(key string) (string, bool) {
+func (c *cacheFake) Get(_key string) (string, bool) {
 	return "", false
 }
 
-func (c *cacheFake) Put(key string, value interface{}) {
+func (c *cacheFake) Put(_key string, _value interface{}) {
 	// do nothing
 }
 

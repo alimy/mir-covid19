@@ -5,6 +5,9 @@
 package cache
 
 import (
+	"time"
+
+	"github.com/alimy/mgo/json"
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/go-redis/redis/v7"
 	"github.com/sirupsen/logrus"
@@ -15,12 +18,18 @@ type cacheRedis struct {
 }
 
 func (c *cacheRedis) Get(key string) (string, bool) {
-	// TODO
+	if data, err := c.client.Get(key).Result(); err == nil {
+		return data, true
+	}
 	return "", false
 }
 
 func (c *cacheRedis) Put(key string, value interface{}) {
-	// TODO
+	if data, err := json.Marshal(value); err == nil {
+		c.client.Set(key, data, 15*time.Minute)
+	} else {
+		logrus.Errorf("cache[%s] failure: %s", key, err)
+	}
 }
 
 func newCacheRedis() Cache {
