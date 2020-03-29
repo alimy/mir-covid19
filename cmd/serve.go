@@ -45,7 +45,7 @@ func serveRun(_cmd *cobra.Command, _args []string) {
 	logrus.Infof("start with config:%s", conf)
 
 	// register servants to gin
-	e := gin.New()
+	e := gin.Default()
 	registerServants(e)
 
 	// start servant service
