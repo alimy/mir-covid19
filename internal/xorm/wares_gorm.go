@@ -13,57 +13,57 @@ type dwGorm struct {
 	*gorm.DB
 }
 
-func (d *dwGorm) GetInfoBatch() (interface{}, error) {
+func (d *dwGorm) GetInfoBatch(p *InfoBatchArg) (*InfoBatchRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetChinaTotal() (interface{}, error) {
+func (d *dwGorm) GetChinaTotal(p *ChinaTotalArg) (*ChinaTotalRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetAreaInfo(p *AreaInfoArg) (*AreaInfo, error) {
+func (d *dwGorm) GetAreaInfo(p *AreaInfoArg) (*AreaInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignTotal() (interface{}, error) {
+func (d *dwGorm) GetForeignTotal(p *ForeignTotalArg) (*ForeignTotalRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignInfo() (interface{}, error) {
+func (d *dwGorm) GetForeignInfo(p *ForeignInfoArg) (*ForeignInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetForeignHistory() (interface{}, error) {
+func (d *dwGorm) GetForeignHistory(p *ForeignHistoryArg) (*ForeignHistoryRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetHubeiInfo() (interface{}, error) {
+func (d *dwGorm) GetHubeiInfo(p *HubeiInfoArg) (*HubeiInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetRate() (interface{}, error) {
+func (d *dwGorm) GetRate(p *RateArg) (*RateRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetCityInfoByCode() (interface{}, error) {
+func (d *dwGorm) GetCityInfoByCode(p *CityInfoByCodeArg) (*CityInfoByCodeRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetContents() (interface{}, error) {
+func (d *dwGorm) GetContents(p *ContentsArg) (*ContentsRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwGorm) GetAreaContents() (interface{}, error) {
+func (d *dwGorm) GetAreaContents(p *AreaContentsArg) (*AreaContentsRes, error) {
 	// TODO
 	return nil, errNotReady
 }

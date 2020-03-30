@@ -16,15 +16,17 @@ type epidemic struct {
 }
 
 func (e *epidemic) GetInfoBatch(c *gin.Context) {
+	p := &xorm.InfoBatchArg{}
 	e.handle(c, "InfoBatch", func() (interface{}, error) {
-		data, err := e.dw.GetInfoBatch()
+		data, err := e.dw.GetInfoBatch(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetChinaTotal(c *gin.Context) {
+	p := &xorm.ChinaTotalArg{}
 	e.handle(c, "ChinaTotal", func() (interface{}, error) {
-		data, err := e.dw.GetChinaTotal()
+		data, err := e.dw.GetChinaTotal(p)
 		return data, err
 	})
 }
@@ -38,43 +40,49 @@ func (e *epidemic) GetAreaInfo(c *gin.Context) {
 }
 
 func (e *epidemic) GetForeignTotal(c *gin.Context) {
+	p := &xorm.ForeignTotalArg{}
 	e.handle(c, "ForeignTotal", func() (interface{}, error) {
-		data, err := e.dw.GetForeignTotal()
+		data, err := e.dw.GetForeignTotal(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetForeignInfo(c *gin.Context) {
+	p := &xorm.ForeignInfoArg{}
 	e.handle(c, "ForeignInfo", func() (interface{}, error) {
-		data, err := e.dw.GetForeignInfo()
+		data, err := e.dw.GetForeignInfo(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetForeignHistory(c *gin.Context) {
+	p := &xorm.ForeignHistoryArg{}
 	e.handle(c, "ForeignHistory", func() (interface{}, error) {
-		data, err := e.dw.GetForeignHistory()
+		data, err := e.dw.GetForeignHistory(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetHubeiInfo(c *gin.Context) {
+	p := &xorm.HubeiInfoArg{}
 	e.handle(c, "HubeiInfo", func() (interface{}, error) {
-		data, err := e.dw.GetHubeiInfo()
+		data, err := e.dw.GetHubeiInfo(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetRate(c *gin.Context) {
+	p := &xorm.RateArg{}
 	e.handle(c, "Rate", func() (interface{}, error) {
-		data, err := e.dw.GetRate()
+		data, err := e.dw.GetRate(p)
 		return data, err
 	})
 }
 
 func (e *epidemic) GetCityInfoByCode(c *gin.Context) {
+	p := &xorm.CityInfoByCodeArg{}
 	e.handle(c, "CityInfoByCode", func() (interface{}, error) {
-		data, err := e.dw.GetCityInfoByCode()
+		data, err := e.dw.GetCityInfoByCode(p)
 		return data, err
 	})
 }

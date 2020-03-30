@@ -5,6 +5,7 @@
 package servants
 
 import (
+	"github.com/alimy/mir-covid19/internal/xorm"
 	"github.com/gin-gonic/gin"
 
 	ps "github.com/alimy/mir-covid19/mirc/gen/api/ncovh5api/THPneumoniaService"
@@ -15,15 +16,17 @@ type pneumonia struct {
 }
 
 func (e *pneumonia) GetContents(c *gin.Context) {
+	p := &xorm.ContentsArg{}
 	e.handle(c, "Contents", func() (interface{}, error) {
-		data, err := e.dw.GetContents()
+		data, err := e.dw.GetContents(p)
 		return data, err
 	})
 }
 
 func (e *pneumonia) GetAreaContents(c *gin.Context) {
+	p := &xorm.AreaContentsArg{}
 	e.handle(c, "AreaContents", func() (interface{}, error) {
-		data, err := e.dw.GetAreaContents()
+		data, err := e.dw.GetAreaContents(p)
 		return data, err
 	})
 }

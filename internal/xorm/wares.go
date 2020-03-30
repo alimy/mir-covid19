@@ -12,16 +12,16 @@ var (
 
 // Dataware data service interface
 type Dataware interface {
-	GetInfoBatch() (interface{}, error)
-	GetChinaTotal() (interface{}, error)
-	GetAreaInfo(*AreaInfoArg) (*AreaInfo, error)
-	GetForeignTotal() (interface{}, error)
-	GetForeignInfo() (interface{}, error)
-	GetForeignHistory() (interface{}, error)
-	GetHubeiInfo() (interface{}, error)
-	GetRate() (interface{}, error)
-	GetCityInfoByCode() (interface{}, error)
-	GetContents() (interface{}, error)
-	GetAreaContents() (interface{}, error)
+	GetInfoBatch(*InfoBatchArg) (*InfoBatchRes, error)
+	GetChinaTotal(*ChinaTotalArg) (*ChinaTotalRes, error)
+	GetAreaInfo(*AreaInfoArg) (*AreaInfoRes, error)
+	GetForeignTotal(*ForeignTotalArg) (*ForeignTotalRes, error)
+	GetForeignInfo(*ForeignInfoArg) (*ForeignInfoRes, error)
+	GetForeignHistory(*ForeignHistoryArg) (*ForeignHistoryRes, error)
+	GetHubeiInfo(*HubeiInfoArg) (*HubeiInfoRes, error)
+	GetRate(*RateArg) (*RateRes, error)
+	GetCityInfoByCode(*CityInfoByCodeArg) (*CityInfoByCodeRes, error)
+	GetContents(*ContentsArg) (*ContentsRes, error)
+	GetAreaContents(*AreaContentsArg) (*AreaContentsRes, error)
 	Shutdown()
 }

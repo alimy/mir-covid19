@@ -8,56 +8,57 @@ type dwFake struct {
 	// just empty
 }
 
-func (d *dwFake) GetInfoBatch() (interface{}, error) {
+func (d *dwFake) GetInfoBatch(p *InfoBatchArg) (*InfoBatchRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetChinaTotal() (interface{}, error) {
+func (d *dwFake) GetChinaTotal(p *ChinaTotalArg) (*ChinaTotalRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetAreaInfo(p *AreaInfoArg) (*AreaInfo, error) {
-	return nil, errNotReady
-}
-
-func (d *dwFake) GetForeignTotal() (interface{}, error) {
+func (d *dwFake) GetAreaInfo(p *AreaInfoArg) (*AreaInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetForeignInfo() (interface{}, error) {
+func (d *dwFake) GetForeignTotal(p *ForeignTotalArg) (*ForeignTotalRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetForeignHistory() (interface{}, error) {
+func (d *dwFake) GetForeignInfo(p *ForeignInfoArg) (*ForeignInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetHubeiInfo() (interface{}, error) {
+func (d *dwFake) GetForeignHistory(p *ForeignHistoryArg) (*ForeignHistoryRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetRate() (interface{}, error) {
+func (d *dwFake) GetHubeiInfo(p *HubeiInfoArg) (*HubeiInfoRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetCityInfoByCode() (interface{}, error) {
+func (d *dwFake) GetRate(p *RateArg) (*RateRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetContents() (interface{}, error) {
+func (d *dwFake) GetCityInfoByCode(p *CityInfoByCodeArg) (*CityInfoByCodeRes, error) {
 	// TODO
 	return nil, errNotReady
 }
 
-func (d *dwFake) GetAreaContents() (interface{}, error) {
+func (d *dwFake) GetContents(p *ContentsArg) (*ContentsRes, error) {
+	// TODO
+	return nil, errNotReady
+}
+
+func (d *dwFake) GetAreaContents(p *AreaContentsArg) (*AreaContentsRes, error) {
 	// TODO
 	return nil, errNotReady
 }
