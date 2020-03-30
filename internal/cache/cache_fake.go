@@ -4,6 +4,7 @@
 
 package cache
 
+// cacheFake used for test cache
 type cacheFake struct {
 	// just empty
 }

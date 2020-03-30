@@ -23,4 +23,5 @@ type Dataware interface {
 	GetCityInfoByCode() (interface{}, error)
 	GetContents() (interface{}, error)
 	GetAreaContents() (interface{}, error)
+	Shutdown()
 }

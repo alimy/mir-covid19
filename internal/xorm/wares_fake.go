@@ -62,6 +62,10 @@ func (d *dwFake) GetAreaContents() (interface{}, error) {
 	return nil, errNotReady
 }
 
+func (d *dwFake) Shutdown() {
+	// just empty
+}
+
 func newDwFake() Dataware {
 	return &dwFake{}
 }

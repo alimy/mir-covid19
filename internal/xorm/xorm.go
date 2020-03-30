@@ -6,6 +6,7 @@ package xorm
 
 import (
 	"github.com/alimy/mir-covid19/internal/config"
+	"github.com/alimy/mir-covid19/internal/xorm/model"
 	"github.com/jinzhu/gorm"
 	"github.com/sirupsen/logrus"
 
@@ -21,11 +22,27 @@ func NewDataWare() Dataware {
 		logrus.Info("in dataware fake mode so use faked dataware")
 		return newDwFake()
 	}
+
+	initGorm()
 	dialect, dsn := conf.Database.Dsn()
 	db, err := gorm.Open(dialect, dsn)
 	if err != nil {
 		logrus.Fatal(err)
 	}
+	initDB(db)
 	logrus.Infof("connect database(%s) by dsn: %s", dialect, dsn)
+
 	return newDwGorm(db)
+}
+
+func initGorm() {
+	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+		return "t_" + defaultTableName
+	}
+}
+
+func initDB(db *gorm.DB) {
+	// Disable table name's pluralization
+	db.SingularTable(true)
+	db.AutoMigrate(model.AllModels()...)
 }

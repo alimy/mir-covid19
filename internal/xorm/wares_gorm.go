@@ -6,6 +6,7 @@ package xorm
 
 import (
 	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
 )
 
 type dwGorm struct {
@@ -65,6 +66,12 @@ func (d *dwGorm) GetContents() (interface{}, error) {
 func (d *dwGorm) GetAreaContents() (interface{}, error) {
 	// TODO
 	return nil, errNotReady
+}
+
+func (d *dwGorm) Shutdown() {
+	if err := d.Close(); err != nil {
+		logrus.Error(err)
+	}
 }
 
 func newDwGorm(db *gorm.DB) Dataware {
