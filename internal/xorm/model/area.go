@@ -33,24 +33,24 @@ import (
 //PRIMARY KEY (`f_area`)
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 type Area struct {
-	Area           string `gorm:"primary_key;size:64;not null"`
-	Confirm        int32  `gorm:"not null"`
-	Suspect        int32  `gorm:"not null"`
-	Dead           int32  `gorm:"not null"`
-	Heal           int32  `gorm:"not null"`
-	Heavy          int32  `gorm:"not null"`
-	ConfirmAdd     int32  `gorm:"not null"`
-	SuspectAdd     int32  `gorm:"not null"`
-	DeadAdd        int32  `gorm:"not null"`
-	HealAdd        int32  `gorm:"not null"`
-	HeavyAdd       int32  `gorm:"not null"`
-	ConfirmAddDesc string `gorm:"size:64;not null"`
-	IsUpdated      int32  `gorm:"not null"`
-	IsShowHeal     int32  `gorm:"not null"`
-	Status         int32  `gorm:"not null"`
-	Rtx            string `grom:"size:120;not null"`
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
+	Area           string    `gorm:"primary_key;size:64;not null;comment:省份"`
+	Confirm        int       `gorm:"not null;comment:确诊"`
+	Suspect        int       `gorm:"not null;comment:疑似"`
+	Dead           int       `gorm:"not null;comment:死亡"`
+	Heal           int       `gorm:"not null;comment:治愈"`
+	Heavy          int       `gorm:"not null;comment:重症"`
+	ConfirmAdd     int       `gorm:"not null;comment:新增确诊"`
+	SuspectAdd     int       `gorm:"not null;comment:新增疑似"`
+	DeadAdd        int       `gorm:"not null;comment:新增死亡"`
+	HealAdd        int       `gorm:"not null;comment:新增治愈"`
+	HeavyAdd       int       `gorm:"not null;comment:新增重症"`
+	ConfirmAddDesc string    `gorm:"size:64;not null;comment:新增确诊描述"`
+	IsUpdated      int       `gorm:"not null;comment:今日是否已经更新"`
+	IsShowHeal     int       `gorm:"not null;comment:是否展示治愈"`
+	Status         int       `gorm:"not null;comment:是否自动更新"`
+	Rtx            string    `grom:"size:120;not null;comment:修改人"`
+	CreatedAt      time.Time `gorm:"not null;defualt:CURRENT_TIMESTAMP;comment:创建时间"`
+	UpdatedAt      time.Time `gorm:"not null;default:CURRENT_TIMESTAMP;comment:更新时间"`
 }
 
 // AreaAddHistory area add history table schema
