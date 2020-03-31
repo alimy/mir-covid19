@@ -39,6 +39,12 @@ func initGorm() {
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return "t_" + defaultTableName
 	}
+
+	ns := gorm.TheNamingStrategy
+	ns.Column = func(s string) string {
+		return "f_" + ns.Column(s)
+	}
+	gorm.AddNamingStrategy(ns)
 }
 
 func initDB(db *gorm.DB) {
