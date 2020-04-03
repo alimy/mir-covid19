@@ -14,6 +14,10 @@ default: serve
 build: fmt
 	go build -ldflags '$(LDFLAGS)'  -tags '$(TAGS)' -o covid main.go
 
+.PHONY: test
+test:
+	go test ./...
+
 .PHONY: build
 serve: fmt
 	go run -ldflags '$(LDFLAGS)'  -tags '$(TAGS)' main.go serve --debug

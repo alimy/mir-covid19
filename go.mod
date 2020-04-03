@@ -12,4 +12,7 @@ require (
     github.com/jinzhu/gorm v1.9.12
     github.com/BurntSushi/toml v0.3.1
     github.com/go-redis/redis/v7 v7.2.0
+    github.com/DATA-DOG/go-sqlmock v1.4.1
+    github.com/onsi/ginkgo v1.12.0
+    github.com/onsi/gomega v1.7.1
 )
