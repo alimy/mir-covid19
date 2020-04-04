@@ -7,8 +7,8 @@ package main
 import (
 	"log"
 
-	"github.com/alimy/mir/v2/core"
-	"github.com/alimy/mir/v2/engine"
+	. "github.com/alimy/mir/v2/core"
+	. "github.com/alimy/mir/v2/engine"
 
 	_ "github.com/alimy/mir-covid19/mirc/routes"
 )
@@ -16,12 +16,12 @@ import (
 //go:generate go run main.go
 func main() {
 	log.Println("generate code start")
-	opts := core.Options{
-		core.RunMode(core.InSerialDebugMode),
-		core.GeneratorName(core.GeneratorGin),
-		core.SinkPath("./gen"),
+	opts := Options{
+		RunMode(InSerialDebugMode),
+		GeneratorName(GeneratorGin),
+		SinkPath("./gen"),
 	}
-	if err := engine.Generate(opts); err != nil {
+	if err := Generate(opts); err != nil {
 		log.Fatal(err)
 	}
 	log.Println("generate code finish")

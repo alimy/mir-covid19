@@ -5,18 +5,18 @@
 package routes
 
 import (
-	"github.com/alimy/mir/v2"
-	"github.com/alimy/mir/v2/engine"
+	. "github.com/alimy/mir/v2"
+	. "github.com/alimy/mir/v2/engine"
 )
 
 func init() {
-	engine.AddEntry(new(Portal))
+	AddEntry(new(Portal))
 }
 
 // Portal web ui interface handler
 type Portal struct {
-	Index            mir.Get  `mir:"/"`
-	GetMainAssets    mir.Get  `mir:"/index.html"`
-	GetStaticAssets  mir.Get  `mir:"/static/*filepath"`
-	HeadStaticAssets mir.Head `mir:"/static/*filepath"`
+	Index            Get  `mir:"/"`
+	GetMainAssets    Get  `mir:"/index.html"`
+	GetStaticAssets  Get  `mir:"/static/*filepath"`
+	HeadStaticAssets Head `mir:"/static/*filepath"`
 }
