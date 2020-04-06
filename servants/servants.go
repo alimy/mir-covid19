@@ -36,7 +36,7 @@ func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (inter
 		return
 	}
 
-	// avoid breakdown database
+	// avoid cache breakdown
 	if !exist && s.cache.SetNX(key, "", 5*time.Second) {
 		if data, err := fetchData(); err == nil {
 			s.success(c, key, data)
@@ -46,6 +46,7 @@ func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (inter
 	} else {
 		time.Sleep(5 * time.Second)
 		if err, _ := s.cacheWrite(c, name); err != nil {
+			s.failure(c, err)
 			logrus.Error(err)
 		}
 	}
