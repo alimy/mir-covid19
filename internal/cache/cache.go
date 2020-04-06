@@ -5,6 +5,8 @@
 package cache
 
 import (
+	"time"
+
 	"github.com/alimy/mir-covid19/internal/config"
 	"github.com/sirupsen/logrus"
 )
@@ -13,6 +15,7 @@ import (
 type Cache interface {
 	Get(key string) (string, bool)
 	Put(key string, value interface{})
+	SetNX(key string, value interface{}, expiration time.Duration) bool
 }
 
 // NewCache return a cache instance

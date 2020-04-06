@@ -4,6 +4,8 @@
 
 package cache
 
+import "time"
+
 // cacheFake used for test cache
 type cacheFake struct {
 	// just empty
@@ -15,6 +17,10 @@ func (c *cacheFake) Get(_key string) (string, bool) {
 
 func (c *cacheFake) Put(_key string, _value interface{}) {
 	// do nothing
+}
+
+func (c *cacheFake) SetNX(_key string, _value interface{}, _expiration time.Duration) bool {
+	return true
 }
 
 func newCacheFake() Cache {

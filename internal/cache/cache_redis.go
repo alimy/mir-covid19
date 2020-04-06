@@ -32,6 +32,10 @@ func (c *cacheRedis) Put(key string, value interface{}) {
 	}
 }
 
+func (c *cacheRedis) SetNX(key string, value interface{}, expiration time.Duration) bool {
+	return c.client.SetNX(key, value, expiration).Val()
+}
+
 func newCacheRedis() Cache {
 	conf := config.MyConfig()
 	client := redis.NewClient(&redis.Options{

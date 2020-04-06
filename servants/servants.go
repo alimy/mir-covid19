@@ -5,8 +5,10 @@
 package servants
 
 import (
+	"errors"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/alimy/mgo/keys"
 	"github.com/alimy/mir-covid19/internal/cache"
@@ -27,17 +29,34 @@ type baseServant struct {
 }
 
 func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (interface{}, error)) {
-	if resp, exist := s.cache.Get(s.keysPool.Get(key)); exist {
-		if _, err := c.Writer.WriteString(resp); err != nil {
-			logrus.Error(err)
-		}
+	name := s.keysPool.Get(key)
+	err, exist := s.cacheWrite(c, name)
+	if exist && err != nil {
+		logrus.Error(err)
 		return
 	}
-	if data, err := fetchData(); err == nil {
-		s.success(c, key, data)
+
+	// avoid breakdown database
+	if !exist && s.cache.SetNX(key, "", 5*time.Second) {
+		if data, err := fetchData(); err == nil {
+			s.success(c, key, data)
+		} else {
+			s.failure(c, err)
+		}
 	} else {
-		s.failure(c, err)
+		time.Sleep(5 * time.Second)
+		if err, _ := s.cacheWrite(c, name); err != nil {
+			logrus.Error(err)
+		}
 	}
+}
+
+func (s *baseServant) cacheWrite(c *gin.Context, name string) (error, bool) {
+	if resp, _ := s.cache.Get(name); resp != "" {
+		_, err := c.Writer.WriteString(resp)
+		return err, true
+	}
+	return errors.New("not exist result"), false
 }
 
 func (s *baseServant) success(c *gin.Context, key string, data interface{}) {
