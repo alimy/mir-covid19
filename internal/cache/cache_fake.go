@@ -23,6 +23,14 @@ func (c *cacheFake) SetNX(_key string, _value interface{}, _expiration time.Dura
 	return true
 }
 
+func (c *cacheFake) PreCache(key string) bool {
+	return true
+}
+
+func (c *cacheFake) PostCache(key string) {
+	// do nothing
+}
+
 func newCacheFake() Cache {
 	return &cacheFake{}
 }

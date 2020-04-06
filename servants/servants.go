@@ -35,11 +35,16 @@ func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (inter
 		logrus.Error(err)
 		return
 	}
-
 	// avoid cache breakdown
-	if !exist && s.cache.SetNX(key, "", 5*time.Second) {
+	if !exist && s.cache.PreCache(name) {
+		defer func() {
+			if err := recover(); err != nil {
+				logrus.Error(err)
+			}
+			s.cache.PostCache(name)
+		}()
 		if data, err := fetchData(); err == nil {
-			s.success(c, key, data)
+			s.success(c, name, data)
 		} else {
 			s.failure(c, err)
 		}
@@ -53,17 +58,17 @@ func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (inter
 }
 
 func (s *baseServant) cacheWrite(c *gin.Context, name string) (error, bool) {
-	if resp, _ := s.cache.Get(name); resp != "" {
+	if resp, exist := s.cache.Get(name); exist {
 		_, err := c.Writer.WriteString(resp)
 		return err, true
 	}
 	return errors.New("not exist result"), false
 }
 
-func (s *baseServant) success(c *gin.Context, key string, data interface{}) {
+func (s *baseServant) success(c *gin.Context, name string, data interface{}) {
 	resp := okResp(data)
 	c.JSON(http.StatusOK, resp)
-	s.cache.Put(s.keysPool.Get(key), resp)
+	s.cache.Put(name, resp)
 }
 
 func (s *baseServant) failure(c *gin.Context, err error) {

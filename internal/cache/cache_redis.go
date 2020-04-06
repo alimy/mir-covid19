@@ -5,6 +5,7 @@
 package cache
 
 import (
+	"sync"
 	"time"
 
 	"github.com/alimy/mgo/json"
@@ -14,7 +15,9 @@ import (
 )
 
 type cacheRedis struct {
-	client *redis.Client
+	mu        *sync.Mutex
+	client    *redis.Client
+	preCaches map[string]struct{}
 }
 
 func (c *cacheRedis) Get(key string) (string, bool) {
@@ -30,6 +33,24 @@ func (c *cacheRedis) Put(key string, value interface{}) {
 	} else {
 		logrus.Errorf("cache[%s] failure: %s", key, err)
 	}
+}
+
+func (c *cacheRedis) PreCache(key string) bool {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	_, exist := c.preCaches[key]
+	if !exist {
+		c.preCaches[key] = struct{}{}
+	}
+	return !exist
+}
+
+func (c *cacheRedis) PostCache(key string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	delete(c.preCaches, key)
 }
 
 func (c *cacheRedis) SetNX(key string, value interface{}, expiration time.Duration) bool {
@@ -48,6 +69,8 @@ func newCacheRedis() Cache {
 	}
 	logrus.Info("initial redis finish")
 	return &cacheRedis{
-		client: client,
+		client:    client,
+		mu:        &sync.RWMutex{},
+		preCaches: make(map[string]struct{}, 16),
 	}
 }
