@@ -97,6 +97,7 @@ func newCacheRedis() Cache {
 	return &cacheRedis{
 		client:        client,
 		mu:            &sync.Mutex{},
+		maxTtl:        10 * time.Second,
 		preCacheConds: make(map[string]*preCacheCond, 16),
 	}
 }
