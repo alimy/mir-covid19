@@ -4,7 +4,9 @@
 
 package cache
 
-import "time"
+import (
+	"time"
+)
 
 // cacheFake used for test cache
 type cacheFake struct {
@@ -23,8 +25,8 @@ func (c *cacheFake) SetNX(_key string, _value interface{}, _expiration time.Dura
 	return true
 }
 
-func (c *cacheFake) PreCache(key string) bool {
-	return true
+func (c *cacheFake) PreCache(key string) (<-chan struct{}, bool) {
+	return nil, true
 }
 
 func (c *cacheFake) PostCache(key string) {

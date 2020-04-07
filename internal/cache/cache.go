@@ -16,7 +16,7 @@ type Cache interface {
 	Get(key string) (string, bool)
 	Put(key string, value interface{})
 	SetNX(key string, value interface{}, expiration time.Duration) bool
-	PreCache(key string) bool
+	PreCache(key string) (<-chan struct{}, bool)
 	PostCache(key string)
 }
 

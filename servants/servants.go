@@ -30,13 +30,14 @@ type baseServant struct {
 
 func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (interface{}, error)) {
 	name := s.keysPool.Get(key)
-	err, exist := s.cacheWrite(c, name)
-	if exist && err != nil {
-		logrus.Error(err)
+	if err, exist := s.cacheWrite(c, name); exist {
+		if err != nil {
+			logrus.Error(err)
+		}
 		return
 	}
 	// avoid cache breakdown
-	if !exist && s.cache.PreCache(name) {
+	if done, redyCache := s.cache.PreCache(name); redyCache {
 		defer func() {
 			if err := recover(); err != nil {
 				logrus.Error(err)
@@ -49,7 +50,13 @@ func (s *baseServant) handle(c *gin.Context, key string, fetchData func() (inter
 			s.failure(c, err)
 		}
 	} else {
-		time.Sleep(5 * time.Second)
+		timer := time.NewTimer(5 * time.Second)
+		select {
+		case <-done:
+			timer.Stop()
+		case <-timer.C:
+		}
+
 		if err, _ := s.cacheWrite(c, name); err != nil {
 			s.failure(c, err)
 			logrus.Error(err)

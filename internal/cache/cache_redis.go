@@ -14,10 +14,27 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type preCacheCond struct {
+	inTime time.Time
+	done   chan struct{}
+}
+
 type cacheRedis struct {
-	mu        *sync.Mutex
-	client    *redis.Client
-	preCaches map[string]struct{}
+	mu            *sync.Mutex
+	client        *redis.Client
+	maxTtl        time.Duration
+	preCacheConds map[string]*preCacheCond
+}
+
+func newPreCacheCond() *preCacheCond {
+	return &preCacheCond{
+		inTime: time.Now(),
+		done:   make(chan struct{}),
+	}
+}
+
+func (c *preCacheCond) reset() {
+	c.inTime = time.Now()
 }
 
 func (c *cacheRedis) Get(key string) (string, bool) {
@@ -35,22 +52,31 @@ func (c *cacheRedis) Put(key string, value interface{}) {
 	}
 }
 
-func (c *cacheRedis) PreCache(key string) bool {
+func (c *cacheRedis) PreCache(key string) (<-chan struct{}, bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	_, exist := c.preCaches[key]
+	redyCache := false
+	cond, exist := c.preCacheConds[key]
 	if !exist {
-		c.preCaches[key] = struct{}{}
+		cond = newPreCacheCond()
+		c.preCacheConds[key] = cond
+		redyCache = true
+	} else if exist && time.Since(cond.inTime) >= c.maxTtl {
+		cond.reset()
+		redyCache = true
 	}
-	return !exist
+	return cond.done, redyCache
 }
 
 func (c *cacheRedis) PostCache(key string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	delete(c.preCaches, key)
+	if cond, exist := c.preCacheConds[key]; exist {
+		cond.done <- struct{}{}
+	}
+	delete(c.preCacheConds, key)
 }
 
 func (c *cacheRedis) SetNX(key string, value interface{}, expiration time.Duration) bool {
@@ -69,8 +95,8 @@ func newCacheRedis() Cache {
 	}
 	logrus.Info("initial redis finish")
 	return &cacheRedis{
-		client:    client,
-		mu:        &sync.RWMutex{},
-		preCaches: make(map[string]struct{}, 16),
+		client:        client,
+		mu:            &sync.Mutex{},
+		preCacheConds: make(map[string]*preCacheCond, 16),
 	}
 }
